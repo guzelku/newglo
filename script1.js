@@ -539,7 +539,7 @@ window.addEventListener('DOMContentLoaded', function(){
            
             outputData();
          } else{
-           redject(request.status);
+          errorData(request.status);
          }
        });
      
