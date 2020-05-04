@@ -443,7 +443,7 @@ const sendForm = () =>{
        },
   
        user_phone:{
-         pattern: new RegExp('(\+\d{1}|8)[0-9]{10,18}', 'g'),
+         pattern: new RegExp('(\\+?7|8)[0-9]{10,18}', 'g'),
         message: 'Invalid message'
        }
      };
