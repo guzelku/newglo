@@ -450,7 +450,7 @@ window.addEventListener('DOMContentLoaded', function(){
         },
    
         user_phone:{
-         pattern: new RegExp('[0-9]$', 'igm'),
+        pattern: new RegExp('(\\+?7|8)[0-9]{10,18}', 'g'),
          message: 'Invalid message'
         }
       };
