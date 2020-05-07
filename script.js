@@ -29,10 +29,7 @@ function getTimeRemaining(){
    
 function updateClock(){
        let timer = getTimeRemaining();
-     
-
-       console.log(timer.hours);
-         
+            
        timeHours.textContent = addNull(timer.hours);
        timeMinutes.textContent= addNull(timer.minutes);
        timeSeconds.textContent = addNull(timer.seconds);
@@ -442,7 +439,7 @@ const sendForm = () =>{
       },
  
       user_phone:{
-       pattern: new RegExp('[0-9]{10,18}', 'g'),
+       pattern: new RegExp('(\\+?7|8)[0-9]{10,18}', 'g'),
        message: 'Invalid message'
       }
     };
@@ -480,7 +477,7 @@ const sendForm = () =>{
       
        formData[key]=val;
 
-       console.log(formData[key]);
+     
       });
      
    statusMessage.textContent = loadMessage;
@@ -494,60 +491,37 @@ const sendForm = () =>{
      clear();
 
      }else{
-    
      //вызываем функцию передачи данных  на сервер (она ниже)
     postData(body)
-     .then(() =>{statusMessage.textContent = successMessage; })
+     .then((response) =>{
+       if(response.status !==200){
+         throw new Error('status network not 200');
+       }
+      statusMessage.textContent = successMessage; })
+
      .catch((error)=> {statusMessage.textContent = errorMessage;console.log('error');});
      clear();
-   
-   }
+      }
 
    });
    
  //сама функция
 const postData =(body) =>{
- 
-return new Promise((resolve, redject) =>{
-   
- const request = new XMLHttpRequest();
-   
 
-     request.addEventListener('readystatechange', ()=>{
-
-       if(request.readyState !==4){
-           return;
-       } if(request.status === 200){
-           resolve();
-           statusMessage.textContent = successMessage;
-       } else{
-         redject(request.status);
-         statusMessage.textContent = errorMessage;
-         console.log('error');
-       }
-     });
-   
-   
-       request.open('POST', './server.php');
-     request.setRequestHeader('Content-Type', 'application/json');
-     request.send(JSON.stringify(body));
-     
-});
-
-
-  
-   
+  return fetch('./server.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+  });
 };
  
  }//end forEach
 
  );//end forEach
 
- 
-
-
- 
-       
+   
 
 };
 sendForm(); 
