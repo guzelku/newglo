@@ -9,9 +9,9 @@ const toggleMenu = ()=>{
              menu.style.transform =`translate(0)`;
         }
         else{
-         menu.style.transform =`translate(-100%)`;*/
+         menu.style.transform =`translate(-100%)`};*/
  menu.classList.toggle('active-menu');
-        }
+        
      };
   
    
